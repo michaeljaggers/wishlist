@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Axios from 'axios';
+//import Axios from 'axios';
 import './App.css';
 import WishListBanner from './components/WishListBanner';
 import WishListCreator from './components/WishListCreator';
