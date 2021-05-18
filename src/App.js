@@ -11,33 +11,71 @@ export default class App extends Component {
     super(props);
     this.state = {
       userName: 'Michael',
-      wishes: [],
-      showOwned: true
+      wishes: [
+        {
+          WishID: 0,
+          Wish: "iPhone 12 Pro",
+          Owned: false
+        },
+        {
+          WishID: 1,
+          Wish: "Audi R5",
+          Owned: false
+        },
+        {
+          WishID: 2,
+          Wish: "MacBook Pro",
+          Owned: false
+        },
+        {
+          WishID: 3,
+          Wish: "Apple Watch",
+          Owned: true
+        }
+      ],
+      showOwned: true,
+      key: 3
     }
   }
 
   componentDidMount = () => {
-    // Get
+    // Axios.get() & setState()
   }
 
   createNewWish = (wish) => {
-    if(!this.state.wishes.find(w => w.Item === wish)) {
+    let currentKey = this.state.key;
+    currentKey++;
+    this.setState({ key: currentKey })
+    
+    if(!this.state.wishes.find(w => w.Wish === wish)) {
       let newItem = {
-        Item: wish,
+        WishID: currentKey,
+        Wish: wish,
         Owned: false
       };
 
-      // Post
+      // Axios.post() & setState()
+      let updatedItems = this.state.wishes;
+      updatedItems.push(newItem);
+      this.setState({ wishes: updatedItems })
     }
   }
 
   toggleOwned = (wish) => {
-
-    // Put
+    wish.Owned = !wish.Owned;
+    // Axios.put() & setState()
+    let updatedItems = this.state.wishes;
+    let index = updatedItems.findIndex(w => w.WishID === wish.WishID);
+    updatedItems[index] = wish;
+    this.setState({ wishes: updatedItems });
   }
 
-  deleteWish = () => {
-    // Delete
+  deleteWish = (wish) => {
+    // Axios.delete() & setState()
+    let updatedItems = this.state.wishes;
+    let index = updatedItems.findIndex(w => w.WishID === wish.WishID);
+    updatedItems.splice(index, 1);
+    this.setState({ wishes: updatedItems });
   }
 
   wishTableRows = (ownedValue) => {

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class WishItemRow extends Component {
   render = () =>
   <tr>
-    <td>{this.props.item.Item}</td>
+    <td>{this.props.item.Wish}</td>
     <td>
       <input
         type="checkbox"
