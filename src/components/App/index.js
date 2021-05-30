@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-//import Axios from 'axios';
-import './App.css';
-import WishListBanner from './components/WishListBanner';
-import WishListCreator from './components/WishListCreator';
-import WishItemRow from './components/WishItemRow';
-import VisibilityControl from './components/VisibilityControl';
 
+//import Axios from 'axios';
+import WishListBanner from '../WishListBanner';
+import WishListCreator from '../WishListCreator';
+import WishItemRow from '../WishItemRow';
+import VisibilityControl from '../VisibilityControl';
 export default class App extends Component {
   constructor(props) {
     super(props);
