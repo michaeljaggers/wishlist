@@ -16,11 +16,12 @@ import WishItemRow from '../WishItemRow';
 import VisibilityControl from '../VisibilityControl';
 
 import * as ROUTES from '../../constants/routes';
-export default class App extends Component {
+import { withFirebase } from '../Firebase';
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: 'Michael',
+      authUser: null,
       wishes: [
         {
           WishID: 0,
@@ -48,8 +49,18 @@ export default class App extends Component {
     }
   }
 
-  componentDidMount = () => {
-    // Axios.get() & setState()
+  componentDidMount() {
+    this.listener = this.props.firebase.auth.onAuthStateChanged(
+      authUser => {
+        authUser
+          ? this.setState({ authUser })
+          : this.setState({ authUser: null });
+    },
+    );
+  }
+
+  componentWillUnmount() {
+    this.listener();
   }
 
   createNewWish = (wish) => {
@@ -105,7 +116,7 @@ export default class App extends Component {
     <Router>
       <WishListBanner name={this.state.userName} wishes={this.state.wishes} />
       <div>
-        <Navigation />
+        <Navigation authUser={this.state.authUser} />
         <hr />
 
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
@@ -154,3 +165,5 @@ export default class App extends Component {
       </div>
     </Router>
 }
+
+export default withFirebase(App);
