@@ -1,11 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class WishListBanner extends Component {
-  render = () =>
-      <h4 className = "bg-primary text-white text-center p-2" >
-      {this.props.name}'s Wish List
-      ({this.props.wishes.filter(w => !w.Owned).length} items)
-    </h4>
-}
+const WishListBanner = () => <h4 className = "bg-primary text-white text-left p-2" >Wish List</h4>;
 
 export default WishListBanner

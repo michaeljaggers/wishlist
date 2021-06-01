@@ -1,6 +1,7 @@
-import firebase from 'firebase/app';
+import app from 'firebase/app';
 import 'firebase/firebase-analytics';
 import 'firebase/auth';
+import 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -13,11 +14,12 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
-export default class Firebase {
+class Firebase {
   constructor() {
-    firebase.initializeApp(firebaseConfig);
+    app.initializeApp(firebaseConfig);
 
-    this.auth = firebase.auth();
+    this.auth = app.auth();
+    this.db = app.database();
   }
 
   // *** Auth API ***
@@ -33,4 +35,11 @@ export default class Firebase {
 
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
+
+  // *** User API ***
+  user = uid => this.db.ref(`users/${uid}`);
+
+  users = () => this.db.ref('users');
 }
+
+export default Firebase;
