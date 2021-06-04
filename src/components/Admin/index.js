@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
-// import * as ROLES from '../../constants/roles';
-// import { withAuthorization } from '../Session';
+import { withAuthorization } from '../Session';
+import * as ROLES from '../../constants/roles';
 
 class AdminPage extends Component {
   constructor(props) {
@@ -69,8 +70,10 @@ const UserList = ({ users }) => (
   </ul>
 );
 
-// const condition = authUser =>
-//   authUser && !!authUser.roles[ROLES.ADMIN];
+const condition = authUser =>
+  authUser && !!authUser.roles[ROLES.ADMIN];
 
-// export default withAuthorization(condition)(AdminPage);
-export default withFirebase(AdminPage);
+export default compose(
+    withAuthorization(condition),
+    withFirebase,
+)(AdminPage);
