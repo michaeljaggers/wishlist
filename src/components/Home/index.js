@@ -6,8 +6,6 @@ import WishListCreator from '../WishListCreator';
 import WishItemRow from '../WishItemRow';
 import VisibilityControl from '../VisibilityControl';
 
-const condition = authUser => !!authUser;
-
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -126,5 +124,7 @@ class HomePage extends Component {
           }
         </div>
 }
+
+const condition = authUser => !!authUser;
 
 export default withAuthorization(condition)(HomePage);

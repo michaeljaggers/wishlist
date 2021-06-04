@@ -1,24 +1,8 @@
 import React, { Component } from 'react';
 
 import { withFirebase } from '../Firebase';
-
-const UserList = ({ users }) => (
-  <ul>
-    {users.map(user => (
-      <li key={user.uid}>
-        <span>
-          <strong>ID:</strong> {user.uid}
-        </span>
-        <span>
-          <strong>E-Mail:</strong> {user.email}
-        </span>
-        <span>
-          <strong>Username:</strong> {user.username}
-        </span>
-      </li>
-    ))}
-  </ul>
-);
+// import * as ROLES from '../../constants/roles';
+// import { withAuthorization } from '../Session';
 
 class AdminPage extends Component {
   constructor(props) {
@@ -67,4 +51,26 @@ class AdminPage extends Component {
   }
 }
 
+const UserList = ({ users }) => (
+  <ul>
+    {users.map(user => (
+      <li key={user.uid}>
+        <span>
+          <strong>ID:</strong> {user.uid}
+        </span>
+        <span>
+          <strong>E-Mail:</strong> {user.email}
+        </span>
+        <span>
+          <strong>Username:</strong> {user.username}
+        </span>
+      </li>
+    ))}
+  </ul>
+);
+
+// const condition = authUser =>
+//   authUser && !!authUser.roles[ROLES.ADMIN];
+
+// export default withAuthorization(condition)(AdminPage);
 export default withFirebase(AdminPage);
